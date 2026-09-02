@@ -29,9 +29,10 @@ type stream struct {
 	recvWindow uint32    // remaining space in the recv buffer
 	resetOnce  sync.Once // == 1 only if we sent a reset to close this connection
 
-	// just for embedding purposes to avoid heap alloc, use 'window' and 'buf'
+	// just for embedding purposes to avoid heap alloc, use 'window', 'buf' and 'frData'
 	windowImpl condWindow
 	bufImpl    inboundBuffer
+	frDataImpl frame.Data
 
 	id             frame.StreamId // stream id (const)
 	session        sessionPrivate // the parent session (const)
@@ -40,7 +41,7 @@ type stream struct {
 	writer         sync.Mutex     // only one writer at a time
 	writeDeadline  time.Time      // deadline for writes (protected by writer mutex)
 	windowSize     uint32         // max window size
-	frData         frame.Data     // data frame used in writes
+	frData         *frame.Data    // data frame used in writes
 	halfCloseMutex sync.Mutex     // synchornizes access to half-close tracking state
 	closedState    uint8          // used for determining when both in/out streams are closed
 }
@@ -71,6 +72,7 @@ func newStream(sess sessionPrivate, id frame.StreamId, windowSize uint32, fin bo
 	str.window = &str.windowImpl
 	str.bufImpl.Init(int(windowSize))
 	str.buf = &str.bufImpl
+	str.frData = &str.frDataImpl
 
 	if fin {
 		str.window.SetError(streamClosed)
@@ -287,7 +289,10 @@ func (s *stream) write(buf []byte, fin bool) (n int, err error) {
 		}
 
 		// write the frame
-		if err = s.session.writeFrame(&s.frData, s.writeDeadline); err != nil {
+		if err = s.session.writeFrame(s.frData, s.writeDeadline); err != nil {
+			// the writer goroutine may still be writing this frame out, so
+			// leave it with them and pack the next one into a new frame
+			s.frData = &frame.Data{}
 			s.writer.Unlock()
 			return
 		}
