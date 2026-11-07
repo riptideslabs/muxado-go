@@ -275,7 +275,16 @@ func (s *session) writeFrame(f frame.Frame, dl time.Time) error {
 	case <-timeout:
 		return writeTimeout
 	case <-s.dead:
-		return sessionClosed
+		// the writer may have finished before the session died, with both
+		// channels ready by the time this goroutine runs: what happened to the
+		// frame is what the writer reported
+		select {
+		case err := <-req.err:
+			poolPut(req.err)
+			return err
+		default:
+			return sessionClosed
+		}
 	}
 }
 
