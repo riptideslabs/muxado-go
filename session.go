@@ -8,7 +8,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 // private interface for Sessions to call Streams

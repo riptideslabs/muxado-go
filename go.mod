@@ -1,4 +1,4 @@
-module go.riptides.io/muxado-go
+module go.riptides.io/muxado-go/v2
 
 go 1.21
 

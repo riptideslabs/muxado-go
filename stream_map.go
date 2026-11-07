@@ -4,7 +4,7 @@ import (
 	"maps"
 	"sync"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 const (

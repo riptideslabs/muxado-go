@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 func newFakeStream(sess sessionPrivate, id frame.StreamId, windowSize uint32, fin bool, init bool) streamPrivate {

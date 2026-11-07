@@ -4,7 +4,7 @@ import (
 	"testing"
 	"time"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 // TestDieRaceMissesOrphanedStream is a regression test for a race condition in

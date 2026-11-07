@@ -5,7 +5,7 @@ import (
 	"io/ioutil"
 	"testing"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 func TestCloseWrite(t *testing.T) {

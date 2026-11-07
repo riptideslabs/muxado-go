@@ -9,7 +9,7 @@ import (
 	"sync/atomic"
 	"time"
 
-	"go.riptides.io/muxado-go/frame"
+	"go.riptides.io/muxado-go/v2/frame"
 )
 
 var (
