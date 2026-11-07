@@ -1,4 +1,4 @@
-module golang.ngrok.com/muxado/v2
+module go.riptides.io/muxado-go
 
 go 1.21
 

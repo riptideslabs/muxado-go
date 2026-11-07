@@ -5,7 +5,7 @@ import (
 	"testing"
 	"time"
 
-	"golang.ngrok.com/muxado/v2/frame"
+	"go.riptides.io/muxado-go/frame"
 )
 
 // TestWriteFrameKeepsAWriteThatCompletedBeforeTheSessionDied is a regression

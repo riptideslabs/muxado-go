@@ -1,6 +1,10 @@
-[![Go Reference](https://pkg.go.dev/badge/golang.ngrok.com/muxado.svg)](https://pkg.go.dev/golang.ngrok.com/muxado)
-[![CI](https://github.com/ngrok/muxado-go/actions/workflows/ci.yml/badge.svg)](https://github.com/ngrok/muxado-go/actions/workflows/ci.yml)
+[![Go Reference](https://pkg.go.dev/badge/go.riptides.io/muxado-go.svg)](https://pkg.go.dev/go.riptides.io/muxado-go)
+[![CI](https://github.com/riptideslabs/muxado-go/actions/workflows/ci.yml/badge.svg)](https://github.com/riptideslabs/muxado-go/actions/workflows/ci.yml)
 # muxado - Stream multiplexing for Go 
+
+This is a hard fork of [ngrok/muxado-go](https://github.com/ngrok/muxado-go), taken from
+[waynz0r/muxado-go](https://github.com/waynz0r/muxado-go) at v2.0.3 and maintained by Riptides. It keeps
+the history and the MIT license of the original, and its module path is `go.riptides.io/muxado-go`.
 
 muxado implements a general purpose stream-multiplexing protocol. muxado allows clients applications
 to multiplex any io.ReadWriteCloser (like a net.Conn) into multiple, independent full-duplex byte streams.
